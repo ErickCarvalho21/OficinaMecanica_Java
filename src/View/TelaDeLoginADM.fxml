@@ -13,10 +13,10 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField alignment="TOP_LEFT" layoutX="168.0" layoutY="157.0" mouseTransparent="true" prefHeight="26.0" prefWidth="263.0" />
-      <TextField layoutX="168.0" layoutY="227.0" prefHeight="26.0" prefWidth="263.0" />
+      <TextField fx:id="emailDoLogin" alignment="TOP_LEFT" layoutX="168.0" layoutY="157.0" mouseTransparent="true" prefHeight="26.0" prefWidth="263.0" />
+      <TextField fx:id="senhaDoLogin" layoutX="168.0" layoutY="227.0" prefHeight="26.0" prefWidth="263.0" />
       <Label layoutX="168.0" layoutY="139.0" text="Email" />
       <Label layoutX="166.0" layoutY="209.0" text="Senha" />
-      <Button layoutX="203.0" layoutY="291.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="193.0" text="Entrar" />
+      <Button layoutX="203.0" layoutY="291.0" mnemonicParsing="false" onAction="#fazerLogin" prefHeight="30.0" prefWidth="193.0" text="Entrar" />
    </children>
 </AnchorPane>
