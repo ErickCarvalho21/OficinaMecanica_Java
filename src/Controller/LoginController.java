@@ -1,27 +1,28 @@
 package Controller;
 
 import DB.ConexaoComBanco;
-import Model.Administrador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
 public class LoginController {
 
-    @FXML
-    private TextField emailDoLogin;
+        @FXML
+        private Button botaoLogin;
 
-    @FXML
-    private TextField senhaDoLogin;
-    @FXML
-    private Button botaoLogin;
+        @FXML
+        private TextField emailDoLogin;
+
+        @FXML
+        private PasswordField senhaDoLogin;
 
     @FXML
     void fazerLogin(ActionEvent event) {
@@ -32,7 +33,7 @@ public class LoginController {
 
         Connection conexao = ConexaoComBanco.getConnection();
         PreparedStatement stmt = null;
-        if (isValidEmail == true) {
+        if (isValidEmail) {
             try {
                 stmt = conexao.prepareStatement("INSERT INTO administrador (email, senha) VALUES (?, ?)"); // previne de SQL injection
                 stmt.setString(1, email_valido);

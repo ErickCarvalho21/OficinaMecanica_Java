@@ -16,6 +16,7 @@ public class App extends Application {
         Scene tela = new Scene(root);
 
         primaryStage.setTitle("Tela de login");
+        primaryStage.setFullScreen(true);
         primaryStage.setScene(tela);
         primaryStage.show();
     }
