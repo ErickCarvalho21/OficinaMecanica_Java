@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane style="-fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+<StackPane style="-fx-background-color:#778899;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
 
     <VBox alignment="CENTER" maxHeight="550" maxWidth="400" spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 30, 0, 0, 10);">
         <padding>
             <Insets bottom="40" left="40" right="40" top="40" />
         </padding>
 
-        <Label style="-fx-text-fill: #333333;" text="Bem-vindo">
+        <Label style="-fx-text-fill: #333333;" text="OFICINA">
             <font>
                 <Font name="System Bold" size="32" />
             </font>
@@ -47,7 +47,7 @@
             <PasswordField fx:id="senhaDoLogin" prefHeight="45" promptText="Digite sua senha" style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 0 15 0 15; -fx-font-size: 14px; -fx-border-color: transparent;" />
         </VBox>
 
-        <Button fx:id="botaoLogin" maxWidth="Infinity" onAction="#fazerLogin" prefHeight="45" style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand; -fx-border-width: 0;" text="ENTRAR">
+        <Button fx:id="botaoLogin" maxWidth="Infinity" onAction="#fazerLogin" prefHeight="45" style="-fx-background-color:#4682B4; -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand; -fx-border-width: 0;" text="ENTRAR">
             <font>
                 <Font name="System Bold" size="14" />
             </font>

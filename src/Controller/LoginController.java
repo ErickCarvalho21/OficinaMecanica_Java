@@ -1,6 +1,7 @@
 package Controller;
 
 import DB.ConexaoComBanco;
+import Templates.Alertas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ public class LoginController {
     @FXML
     void fazerLogin(ActionEvent event) {
         Validacoes email = new Validacoes();
+        Alertas alertaConfirmacao = new Alertas();
         String email_valido = emailDoLogin.getText();
         String senha = senhaDoLogin.getText();
         boolean isValidEmail = email.validarEmail(email_valido);
@@ -35,15 +37,15 @@ public class LoginController {
         PreparedStatement stmt = null;
         if (isValidEmail) {
             try {
-                stmt = conexao.prepareStatement("INSERT INTO administrador (email, senha) VALUES (?, ?)"); // previne de SQL injection
+                stmt = conexao.prepareStatement("SELECT * FROM administrador WHERE email = ? AND senha = ? "); // previne de SQL injection
                 stmt.setString(1, email_valido);
                 stmt.setString(2, senha);
 
                 stmt.executeUpdate();
 
-                JOptionPane.showMessageDialog(null,"Sucesso ao salvar no banco");
+                alertaConfirmacao.mostrarConfirmacao();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao salvar" + e);
+                JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + e);
             }finally {
                 ConexaoComBanco.fechaConexao(conexao, stmt);
             }
