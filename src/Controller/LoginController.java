@@ -55,7 +55,7 @@ public class LoginController {
 
                 if (resultadoDaQuery.next()){
                     alerta.mostrarConfirmacao();
-                MudarTela.trocarJanela(event, "/View/PainelAdministrativo.fxml");
+                    MudarTela.trocarJanela(event, "/View/PainelAdministrativo.fxml");
                 }
                 else {
                     alerta.mostrarErro("Erro, email ou senha inválido, tente novamente!");

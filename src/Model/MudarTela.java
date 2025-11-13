@@ -12,6 +12,7 @@ import java.io.IOException;
 public class MudarTela {
 
     // static consegue acessar só chamando a classe o metodo, exceção de Input e Output
+    // metodo de trocar janelas
     public static void trocarJanela(ActionEvent event, String fxml) throws IOException {
         Parent root = FXMLLoader.load(MudarTela.class.getResource(fxml));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
