@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Validacoes;
+import Templates.Alertas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -26,7 +28,21 @@ public class AdicionarClientesController {
 
     @FXML
     void salvarCliente(ActionEvent event) {
+        Alertas alertas = new Alertas();
+        Validacoes validacoes = new Validacoes();
+        String nome = txtNome.getText();
+        String cpf = txtCpf.getText();
+        String telefone = txtTelefone.getText();
 
+        boolean isTelefoneValido = validacoes.validarTelefone(telefone);
+
+        // adicionar validação no cpf também
+        if (isTelefoneValido){
+
+
+        }else{
+            alertas.mostrarErroTelefone();
+        }
     }
 
     @FXML
