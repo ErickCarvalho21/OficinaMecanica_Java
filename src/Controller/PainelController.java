@@ -109,6 +109,31 @@ public class PainelController implements Initializable {
 
     }
 
+    @FXML
+    void irParaOrdem(ActionEvent event) {
+
+    }
+
+    @FXML
+    void irParaPecas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void irParaRelatorios(ActionEvent event) {
+
+    }
+
+    @FXML
+    void irParaAgendamentos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void irParaVeiculos(ActionEvent event) throws IOException{
+    MudarTela.trocarJanela(event, "/View/Veiculos.fxml");
+    }
+
 
 
 }

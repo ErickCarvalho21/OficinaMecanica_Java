@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -48,6 +47,7 @@
             <Button maxWidth="Infinity" onAction="#irParaPecas" prefHeight="40.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Peças" />
             <Button maxWidth="Infinity" onAction="#irParaOrdens" prefHeight="40.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Ordens de serviço" />
             <Button maxWidth="Infinity" onAction="#irParaRelatorios" prefHeight="40.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Relatórios" />
+         <Button layoutX="20.0" layoutY="240.0" maxWidth="Infinity" onAction="#irParaAgendamentos" prefHeight="40.0" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Agendamentos" />
             <Region VBox.vgrow="ALWAYS" />
 
             <Separator />
@@ -62,6 +62,7 @@
                 <Button onAction="#irParaAdicionar" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="Adicionar" />
                 <Button onAction="#irParaEditar" style="-fx-background-color: #f39c12; -fx-text-fill: white;" text="Editar" />
                 <Button onAction="#excluirVeiculo" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Excluir" />
+                <Button onAction="#verHistorico" style="-fx-background-color: #9b59b6; -fx-text-fill: white;" text="Histórico" />
             </HBox>
 
             <TableView fx:id="tabelaVeiculos" VBox.vgrow="ALWAYS">
