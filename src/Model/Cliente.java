@@ -8,11 +8,26 @@ public class Cliente {
     private SimpleStringProperty id;
     private SimpleStringProperty nome;
     private SimpleStringProperty cpf;
-    private SimpleStringProperty idade;
     private SimpleStringProperty telefone;
     private SimpleBooleanProperty isVip;
 
 
+    public Cliente(String id, String nome, String cpf, String telefone, boolean isVip){
+        this.id = new SimpleStringProperty(id);
+        this.nome = new SimpleStringProperty(nome);
+        this.cpf = new SimpleStringProperty(cpf);
+        this.telefone = new SimpleStringProperty(telefone);
+        this.isVip = new SimpleBooleanProperty(isVip);
+    }
+
+    // Construtor sem ID (para novos clientes)
+    public Cliente(String nome, String cpf, String telefone, boolean isVip) {
+        this.id = new SimpleStringProperty("");
+        this.nome = new SimpleStringProperty(nome);
+        this.cpf = new SimpleStringProperty(cpf);
+        this.telefone = new SimpleStringProperty(telefone);
+        this.isVip = new SimpleBooleanProperty(isVip);
+    }
 
     public SimpleStringProperty getId() {
         return id;
@@ -38,14 +53,6 @@ public class Cliente {
         this.cpf.set(cpf);
     }
 
-    public SimpleStringProperty getIdade() {
-        return idade;
-    }
-
-    public void setIdade(String idade) {
-        this.idade.set(idade);
-    }
-
     public SimpleStringProperty getTelefone() {
         return telefone;
     }
@@ -53,4 +60,8 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone.set(telefone);
     }
+    public SimpleBooleanProperty isVipProperty() {
+        return isVip;
+    }
+
 }

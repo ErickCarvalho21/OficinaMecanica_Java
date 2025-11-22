@@ -47,10 +47,11 @@ public class PainelController implements Initializable {
         colCpf.setCellValueFactory( data->data.getValue().getCpf());
         colTelefone.setCellValueFactory( data->data.getValue().getCpf());
 
+        carregarClientes();
     }
 
     private void carregarClientes(){
-        tabelaDados.setItems(ClienteDAO.);
+        tabelaDados.setItems(ClienteDAO.listarClientes());
     }
 
     @FXML
