@@ -1,78 +1,121 @@
 package Model;
-import java.util.ArrayList;
-import java.util.List;
+
+import javafx.beans.property.SimpleStringProperty;
 
 public class Veiculo {
-    private int idVeiculo;
-    private int clienteId;
-    private String modelo;
-    private String ano;
-    private String placa;
-    private List<Integer> historicoManutencoes;    
+    private SimpleStringProperty id;
+    private SimpleStringProperty placa;
+    private SimpleStringProperty modelo;
+    private SimpleStringProperty ano;
+    private SimpleStringProperty idCliente;
+    private SimpleStringProperty nomeCliente;
+    private SimpleStringProperty cpfCliente;
 
-    //Cria um veiculo novo a cada instacia de objeto
-    public Veiculo(int idVeiculo, int clienteId, String modelo, String ano, String placa) {
-        this.idVeiculo = idVeiculo;
-        this.clienteId = clienteId;
-        this.modelo = modelo;
-        this.ano = ano;
-        this.placa = placa;
-        this.historicoManutencoes = new ArrayList<>();
+    // Construtor completo
+    public Veiculo(String id, String placa, String modelo, String ano, String idCliente, String nomeCliente, String cpfCliente) {
+        this.id = new SimpleStringProperty(id);
+        this.placa = new SimpleStringProperty(placa);
+        this.modelo = new SimpleStringProperty(modelo);
+        this.ano = new SimpleStringProperty(ano);
+        this.idCliente = new SimpleStringProperty(idCliente);
+        this.nomeCliente = new SimpleStringProperty(nomeCliente);
+        this.cpfCliente = new SimpleStringProperty(cpfCliente);
     }
 
-    /// Para atualizar as informações do veiculo utilize os setters
-    public int getIdVeiculo() {
-        return idVeiculo;
+    // Construtor sem ID (para novos veículos)
+    public Veiculo(String placa, String modelo, String ano, String idCliente) {
+        this.id = new SimpleStringProperty("");
+        this.placa = new SimpleStringProperty(placa);
+        this.modelo = new SimpleStringProperty(modelo);
+        this.ano = new SimpleStringProperty(ano);
+        this.idCliente = new SimpleStringProperty(idCliente);
+        this.nomeCliente = new SimpleStringProperty("");
+        this.cpfCliente = new SimpleStringProperty("");
     }
 
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
+    // Properties para TableView
+    public SimpleStringProperty idProperty() {
+        return id;
     }
 
-    public int getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(int clienteId) {
-        this.clienteId = clienteId;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
-        this.ano = ano;
-    }
-
-    public String getPlaca() {
+    public SimpleStringProperty placaProperty() {
         return placa;
     }
 
+    public SimpleStringProperty modeloProperty() {
+        return modelo;
+    }
+
+    public SimpleStringProperty anoProperty() {
+        return ano;
+    }
+
+    public SimpleStringProperty idClienteProperty() {
+        return idCliente;
+    }
+
+    public SimpleStringProperty nomeClienteProperty() {
+        return nomeCliente;
+    }
+
+    public SimpleStringProperty cpfClienteProperty() {
+        return cpfCliente;
+    }
+
+    // Getters e Setters
+    public String getId() {
+        return id.get();
+    }
+
+    public void setId(String id) {
+        this.id.set(id);
+    }
+
+    public String getPlaca() {
+        return placa.get();
+    }
+
     public void setPlaca(String placa) {
-        this.placa = placa;
+        this.placa.set(placa);
     }
 
-
-    //Retorna o historico de manutenções. UML -> consultarHistoricoDoVeiculo()
-    public List<Integer> getHistoricoManutencoes() {
-        return historicoManutencoes;
+    public String getModelo() {
+        return modelo.get();
     }
 
-    //Atualiza o historico de manutencoes
-    public void addHistoricoManutencoes(int idManutencao) {
-        this.historicoManutencoes.add(idManutencao);
+    public void setModelo(String modelo) {
+        this.modelo.set(modelo);
     }
 
-    
+    public String getAno() {
+        return ano.get();
+    }
 
+    public void setAno(String ano) {
+        this.ano.set(ano);
+    }
 
+    public String getIdCliente() {
+        return idCliente.get();
+    }
+
+    public void setIdCliente(String idCliente) {
+        this.idCliente.set(idCliente);
+    }
+
+    public String getNomeCliente() {
+        return nomeCliente.get();
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente.set(nomeCliente);
+    }
+
+    public String getCpfCliente() {
+        return cpfCliente.get();
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente.set(cpfCliente);
+    }
 }

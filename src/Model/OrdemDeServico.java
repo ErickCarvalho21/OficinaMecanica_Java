@@ -1,72 +1,125 @@
 package Model;
 
-public class OrdemDeServico {
-    private int idOrdemDeServico;
-    private int idAdministrador;
-    private int idVeiculo;
-    private String descricao;
-    private String statusDoServico;
-    private double valorMaoDeObra;
-    private double valorTotal;
+import javafx.beans.property.SimpleStringProperty;
 
-    public boolean criarOrdemDeServico(){throw new UnsupportedOperationException("TODO");}
-    public void atualizarStatus(){throw new UnsupportedOperationException("TODO");}
-    public void calcularTotal(){throw new UnsupportedOperationException("TODO");}
-    public boolean finalizarOrdemDeServico(){throw new UnsupportedOperationException("TODO");}
-    
-    public OrdemDeServico(int idOrdemDeServico, int idAdministrador, int idVeiculo, String descricao,
-            String statusDoServico, double valorMaoDeObra, double valorTotal) {
-        this.idOrdemDeServico = idOrdemDeServico;
-        this.idAdministrador = idAdministrador;
-        this.idVeiculo = idVeiculo;
-        this.descricao = descricao;
-        this.statusDoServico = statusDoServico;
-        this.valorMaoDeObra = valorMaoDeObra;
-        this.valorTotal = valorTotal;
+public class OrdemDeServico {
+    private SimpleStringProperty idOrdem;
+    private SimpleStringProperty idVeiculo;
+    private SimpleStringProperty descricao;
+    private SimpleStringProperty valorMaoObra;
+    private SimpleStringProperty status;
+    private SimpleStringProperty dataAbertura;
+    private SimpleStringProperty dataFinalizacao;
+    private SimpleStringProperty valorTotal;
+
+    // Construtor completo
+    public OrdemDeServico(String idOrdem, String idVeiculo, String descricao, String valorMaoObra,
+                        String status, String dataAbertura, String dataFinalizacao, String valorTotal) {
+        this.idOrdem = new SimpleStringProperty(idOrdem);
+        this.idVeiculo = new SimpleStringProperty(idVeiculo);
+        this.descricao = new SimpleStringProperty(descricao);
+        this.valorMaoObra = new SimpleStringProperty(valorMaoObra);
+        this.status = new SimpleStringProperty(status);
+        this.dataAbertura = new SimpleStringProperty(dataAbertura);
+        this.dataFinalizacao = new SimpleStringProperty(dataFinalizacao);
+        this.valorTotal = new SimpleStringProperty(valorTotal);
     }
-    public int getIdOrdemDeServico() {
-        return idOrdemDeServico;
+
+    // Properties para TableView
+    public SimpleStringProperty idOrdemProperty() {
+        return idOrdem;
     }
-    public void setIdOrdemDeServico(int idOrdemDeServico) {
-        this.idOrdemDeServico = idOrdemDeServico;
-    }
-    public int getIdAdministrador() {
-        return idAdministrador;
-    }
-    public void setIdAdministrador(int idAdministrador) {
-        this.idAdministrador = idAdministrador;
-    }
-    public int getIdVeiculo() {
+
+    public SimpleStringProperty idVeiculoProperty() {
         return idVeiculo;
     }
-    public void setIdVeiculo(int idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
-    public String getDescricao() {
+
+    public SimpleStringProperty descricaoProperty() {
         return descricao;
     }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+
+    public SimpleStringProperty valorMaoObraProperty() {
+        return valorMaoObra;
     }
-    public String getStatusDoServico() {
-        return statusDoServico;
+
+    public SimpleStringProperty statusProperty() {
+        return status;
     }
-    public void setStatusDoServico(String statusDoServico) {
-        this.statusDoServico = statusDoServico;
+
+    public SimpleStringProperty dataAberturaProperty() {
+        return dataAbertura;
     }
-    public double getValorMaoDeObra() {
-        return valorMaoDeObra;
+
+    public SimpleStringProperty dataFinalizacaoProperty() {
+        return dataFinalizacao;
     }
-    public void setValorMaoDeObra(double valorMaoDeObra) {
-        this.valorMaoDeObra = valorMaoDeObra;
-    }
-    public double getValorTotal() {
+
+    public SimpleStringProperty valorTotalProperty() {
         return valorTotal;
     }
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+
+    // Getters e Setters
+    public String getIdOrdem() {
+        return idOrdem.get();
     }
 
-    
-}
+    public void setIdOrdem(String idOrdem) {
+        this.idOrdem.set(idOrdem);
+    }
 
+    public String getIdVeiculo() {
+        return idVeiculo.get();
+    }
+
+    public void setIdVeiculo(String idVeiculo) {
+        this.idVeiculo.set(idVeiculo);
+    }
+
+    public String getDescricao() {
+        return descricao.get();
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao.set(descricao);
+    }
+
+    public String getValorMaoObra() {
+        return valorMaoObra.get();
+    }
+
+    public void setValorMaoObra(String valorMaoObra) {
+        this.valorMaoObra.set(valorMaoObra);
+    }
+
+    public String getStatus() {
+        return status.get();
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
+    public String getDataAbertura() {
+        return dataAbertura.get();
+    }
+
+    public void setDataAbertura(String dataAbertura) {
+        this.dataAbertura.set(dataAbertura);
+    }
+
+    public String getDataFinalizacao() {
+        return dataFinalizacao.get();
+    }
+
+    public void setDataFinalizacao(String dataFinalizacao) {
+        this.dataFinalizacao.set(dataFinalizacao);
+    }
+
+    public String getValorTotal() {
+        return valorTotal.get();
+    }
+
+    public void setValorTotal(String valorTotal) {
+        this.valorTotal.set(valorTotal);
+    }
+}
