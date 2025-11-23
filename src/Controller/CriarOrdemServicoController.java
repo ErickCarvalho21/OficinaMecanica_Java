@@ -1,6 +1,9 @@
 package Controller;
 
-import Model.MudarTela;
+import Model.*;
+import Templates.Alertas;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -11,32 +14,33 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class CriarOrdemServicoController {
 
     @FXML
-    private TableColumn<?, ?> colPecaNome;
+    private TableColumn<Peca, String> colPecaNome;
 
     @FXML
-    private TableColumn<?, ?> colPecaPreco;
+    private TableColumn<Peca, String> colPecaPreco;
 
     @FXML
-    private TableColumn<?, ?> colPecaQtd;
+    private TableColumn<Peca, String> colPecaQtd;
 
     @FXML
-    private TableColumn<?, ?> colPecaTotal;
+    private TableColumn<Peca, String> colPecaTotal;
 
     @FXML
-    private ComboBox<?> comboCliente;
+    private ComboBox<Cliente> comboCliente;
 
     @FXML
-    private ComboBox<?> comboPeca;
+    private ComboBox<Peca> comboPeca;
 
     @FXML
-    private ComboBox<?> comboStatus;
+    private ComboBox<String> comboStatus;
 
     @FXML
-    private ComboBox<?> comboVeiculo;
+    private ComboBox<Veiculo> comboVeiculo;
 
     @FXML
     private Label lblMaoObra;
@@ -48,7 +52,7 @@ public class CriarOrdemServicoController {
     private Label lblTotal;
 
     @FXML
-    private TableView<?> tabelaPecas;
+    private TableView<Peca> tabelaPecas;
 
     @FXML
     private TextArea txtDescricao;
@@ -58,6 +62,10 @@ public class CriarOrdemServicoController {
 
     @FXML
     private TextField txtQuantidade;
+
+    private ObservableList<ItemPeca> pecasAdicionadas = FXCollections.observableArrayList();
+    private Alertas alertas = new Alertas();
+    private DecimalFormat df = new DecimalFormat("R$ #,##0.00");
 
     @FXML
     void adicionarPeca(ActionEvent event) {
