@@ -96,4 +96,16 @@ public class Cliente {
     public void setVip(boolean vip) {
         isVip.set(vip);
     }
+
+    public boolean isVip() {
+        return vip;
+    }
+
+    public void setVip(boolean vip) {
+        this.vip = vip;
+    }
+
+    public int getId() {
+        return id;
+    }
 }
