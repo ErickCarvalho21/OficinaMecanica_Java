@@ -74,4 +74,8 @@ public class PecaDAO {
         }
         return null;
     }
+
+    public static boolean adicionarPeca(String nome, double preco, int quantidade) {
+    return true;
+    }
 }
