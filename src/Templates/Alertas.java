@@ -22,8 +22,8 @@ public class Alertas {
 
     public void mostrarErro(String erro){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro no email");
-        alert.setHeaderText("Erro de digitação, por favor, repita!");
+        alert.setTitle("Erro");
+        alert.setHeaderText("O erro abaixo ocorreu: ");
         alert.setContentText(erro);
         alert.showAndWait();
     }
