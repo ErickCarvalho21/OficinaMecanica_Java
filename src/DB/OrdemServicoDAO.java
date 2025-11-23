@@ -82,7 +82,7 @@ public class OrdemServicoDAO {
     }
 
     public static double calcularValorTotalVeiculo(String idVeiculo) {
-        return 1;
+        return 2.2;
     }
 
 }

@@ -72,7 +72,7 @@ public class HistoricoVeiculoController {
         colValorTotal.setCellValueFactory(data -> data.getValue().valorTotalProperty());
         colDataFinalizacao.setCellValueFactory(data -> data.getValue().dataFinalizacaoProperty());
 
-
+        carregarOrdens();
 
     }
 
