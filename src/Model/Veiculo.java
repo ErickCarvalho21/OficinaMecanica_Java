@@ -11,7 +11,7 @@ public class Veiculo {
     private SimpleStringProperty nomeCliente;
     private SimpleStringProperty cpfCliente;
 
-    // Construtor completo
+
     public Veiculo(String id, String placa, String modelo, String ano, String idCliente, String nomeCliente, String cpfCliente) {
         this.id = new SimpleStringProperty(id);
         this.placa = new SimpleStringProperty(placa);
@@ -22,7 +22,6 @@ public class Veiculo {
         this.cpfCliente = new SimpleStringProperty(cpfCliente);
     }
 
-    // Construtor sem ID (para novos veículos)
     public Veiculo(String placa, String modelo, String ano, String idCliente) {
         this.id = new SimpleStringProperty("");
         this.placa = new SimpleStringProperty(placa);
@@ -33,7 +32,6 @@ public class Veiculo {
         this.cpfCliente = new SimpleStringProperty("");
     }
 
-    // Properties para TableView
     public SimpleStringProperty idProperty() {
         return id;
     }

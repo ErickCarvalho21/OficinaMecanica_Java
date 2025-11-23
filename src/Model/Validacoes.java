@@ -35,6 +35,4 @@ public class Validacoes {
         return true;
     }
 
-    public static void main(String[] args) {
-    }
 }

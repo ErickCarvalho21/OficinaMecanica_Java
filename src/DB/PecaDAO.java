@@ -78,4 +78,8 @@ public class PecaDAO {
     public static boolean adicionarPeca(String nome, double preco, int quantidade) {
     return true;
     }
+
+    public static boolean deletarPeca(String id){
+        return true;
+    }
 }
