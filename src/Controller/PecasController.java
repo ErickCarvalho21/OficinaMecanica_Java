@@ -136,7 +136,7 @@ public class PecasController implements Initializable {
 
     @FXML
     void irParaAdicionar(ActionEvent event) throws IOException {
-        MudarTela.trocarJanela(event, "/View/AdicionarPeca.fxml");
+        MudarTela.trocarJanela(event, "/View/AdicionarPecas.fxml");
     }
     @FXML
     void irParaEditar(ActionEvent event) {
