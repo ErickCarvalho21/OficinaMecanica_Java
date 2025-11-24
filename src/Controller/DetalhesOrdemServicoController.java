@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -34,7 +33,6 @@ public class DetalhesOrdemServicoController {
     @FXML private Label lblTotalPecas;
     @FXML private Label lblValorTotal;
     @FXML private Label lblStatusPagamento;
-    @FXML private VBox boxPagamento;
 
     private OrdemDeServico ordemAtual;
     private Alertas alertas = new Alertas();
@@ -66,6 +64,7 @@ public class DetalhesOrdemServicoController {
         tabelaPecas.setItems(OrdemServicoDAO.listarPecasDaOrdem(ordem.getIdOrdem()));
 
         calcularValores();
+
         verificarPagamento();
     }
 
@@ -74,31 +73,55 @@ public class DetalhesOrdemServicoController {
 
         if (pagamento != null && pagamento.getStatusPagamento().equals("Pago")) {
             lblStatusPagamento.setText("✓ Pago - " + pagamento.getFormaPagamento() + " em " + pagamento.getDataPagamento());
-            boxPagamento.setStyle("-fx-background-color: #d4edda; -fx-padding: 15; -fx-background-radius: 5;");
+            lblStatusPagamento.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
         } else {
             lblStatusPagamento.setText("⚠ Pendente");
-            boxPagamento.setStyle("-fx-background-color: #fff3cd; -fx-padding: 15; -fx-background-radius: 5;");
+            lblStatusPagamento.setStyle("-fx-text-fill: #e67e22; -fx-font-weight: bold;");
+        }
+    }
+
+    // Método auxiliar seguro para converter valores
+    private double parseValor(String valor) {
+        try {
+            if (valor == null || valor.isEmpty()) return 0.0;
+            String v = valor.replace("R$", "").trim();
+
+            int lastComma = v.lastIndexOf(',');
+            int lastDot = v.lastIndexOf('.');
+
+            if (lastComma > lastDot) {
+                // Formato BR (1.000,00)
+                v = v.replace(".", "").replace(",", ".");
+            } else if (lastDot > lastComma) {
+                // Formato US (1,000.00)
+                v = v.replace(",", "");
+            }
+            // Se não tiver separadores ou for simples, o Double.parseDouble resolve
+            return Double.parseDouble(v);
+        } catch (Exception e) {
+            return 0.0;
         }
     }
 
     private void calcularValores() {
         try {
-            String maoObraStr = ordemAtual.getValorMaoObra().replace("R$", "").replace(".", "").replace(",", ".").trim();
-            double maoObra = Double.parseDouble(maoObraStr);
-            lblMaoObra.setText(ordemAtual.getValorMaoObra());
+            // Converter Mão de Obra com segurança
+            double maoObra = parseValor(ordemAtual.getValorMaoObra());
+            lblMaoObra.setText(df.format(maoObra));
 
+            // Somar total das peças
             double totalPecas = 0;
             for (ItemPeca item : tabelaPecas.getItems()) {
-                String totalStr = item.getTotal().replace("R$", "").replace(".", "").replace(",", ".").trim();
-                totalPecas += Double.parseDouble(totalStr);
+                totalPecas += parseValor(item.getTotal());
             }
 
-            DecimalFormat df = new DecimalFormat("R$ #,##0.00");
             lblTotalPecas.setText(df.format(totalPecas));
+            // Soma Mão de Obra + Peças para o Total Final
             lblValorTotal.setText(df.format(maoObra + totalPecas));
 
         } catch (Exception e) {
             System.out.println("Erro ao calcular valores: " + e.getMessage());
+            lblValorTotal.setText("Erro");
         }
     }
 
@@ -111,33 +134,27 @@ public class DetalhesOrdemServicoController {
             return;
         }
 
+        boolean sucesso = OrdemServicoDAO.atualizarStatus(ordemAtual.getIdOrdem(), novoStatus);
 
-            boolean sucesso = OrdemServicoDAO.atualizarStatus(ordemAtual.getIdOrdem(), novoStatus);
+        if (sucesso) {
+            alertas.mostrarConfirmacao("Status atualizado com sucesso!");
+            ordemAtual.setStatus(novoStatus);
 
-            if (sucesso) {
-                alertas.mostrarConfirmacao("Status atualizado com sucesso!");
-                ordemAtual.setStatus(novoStatus);
-
-                // Se finalizou, atualizar data
-                if (novoStatus.equals("Finalizado")) {
-                    lblDataFinalizacao.setText(java.time.LocalDateTime.now().toString());
-                }
-            } else {
-                alertas.mostrarErro("Erro ao atualizar status!");
+            if (novoStatus.equals("Finalizado")) {
+                lblDataFinalizacao.setText(java.time.LocalDateTime.now().toString());
             }
-
+        } else {
+            alertas.mostrarErro("Erro ao atualizar status!");
+        }
     }
 
     @FXML
     void registrarPagamento(ActionEvent event) {
-
-        // Verificar se já foi pago
         if (PagamentoDAO.ordemJaPaga(ordemAtual.getIdOrdem())) {
-            alertas.mostrarConfirmacao("Esta ordem já foi paga!");
+            alertas.mostrarErro("Esta ordem já foi paga!");
             return;
         }
 
-        // Dialog para escolher forma de pagamento
         ChoiceDialog<String> dialog = new ChoiceDialog<>("PIX",
                 "Dinheiro", "Cartão Débito", "Cartão Crédito", "PIX", "Boleto");
         dialog.setTitle("Registrar Pagamento");
@@ -146,14 +163,8 @@ public class DetalhesOrdemServicoController {
 
         dialog.showAndWait().ifPresent(formaPagamento -> {
             try {
-                // Extrair valor total
-                String valorStr = lblValorTotal.getText()
-                        .replace("R$", "")
-                        .replace(" ", "")
-                        .replace(".", "")
-                        .replace(",", ".")
-                        .trim();
-                double valor = Double.parseDouble(valorStr);
+                // Pega o valor total calculado na tela, limpando formatação
+                double valor = parseValor(lblValorTotal.getText());
 
                 boolean sucesso = PagamentoDAO.registrarPagamento(
                         ordemAtual.getIdOrdem(),

@@ -59,6 +59,9 @@ public class CriarOrdemServicoController implements Initializable {
         colPecaPreco.setCellValueFactory(data -> data.getValue().precoUnitarioProperty());
         colPecaTotal.setCellValueFactory(data -> data.getValue().totalProperty());
         tabelaPecas.setItems(pecasAdicionadas);
+
+        // Adicionar listener para atualizar totais quando a mão de obra mudar
+        txtMaoObra.textProperty().addListener((observable, oldValue, newValue) -> atualizarResumo());
     }
 
     private void configurarComboCliente() {
@@ -93,6 +96,28 @@ public class CriarOrdemServicoController implements Initializable {
                 setText(empty || item == null ? null : item.getNomePeca() + " - R$ " + item.getPrecoUnitario());
             }
         });
+    }
+
+    // Metodo auxiliar seguro para converter valores monetários
+    private double parseValor(String valor) {
+        try {
+            if (valor == null || valor.isEmpty()) return 0.0;
+            String v = valor.replace("R$", "").trim();
+
+            int lastComma = v.lastIndexOf(',');
+            int lastDot = v.lastIndexOf('.');
+
+            if (lastComma > lastDot) {
+                // Formato BR (1.000,00) -> remove ponto, troca vírgula por ponto
+                v = v.replace(".", "").replace(",", ".");
+            } else if (lastDot > lastComma) {
+                // Formato US (1,000.00) -> remove vírgula
+                v = v.replace(",", "");
+            }
+            return Double.parseDouble(v);
+        } catch (Exception e) {
+            return 0.0;
+        }
     }
 
     @FXML
@@ -130,7 +155,8 @@ public class CriarOrdemServicoController implements Initializable {
 
         try {
             int quantidade = Integer.parseInt(qtdTexto);
-            double precoUnit = Double.parseDouble(pecaSelecionada.getPrecoUnitario().replace(",", "."));
+            // Usa o método parseValor para evitar erros de formato
+            double precoUnit = parseValor(pecaSelecionada.getPrecoUnitario());
             double total = quantidade * precoUnit;
 
             ItemPeca item = new ItemPeca(
@@ -162,13 +188,12 @@ public class CriarOrdemServicoController implements Initializable {
 
     private void atualizarResumo() {
         try {
-            double maoObra = txtMaoObra.getText().isEmpty() ? 0 : Double.parseDouble(txtMaoObra.getText().replace(",", "."));
+            double maoObra = parseValor(txtMaoObra.getText());
             lblMaoObra.setText(df.format(maoObra));
 
             double totalPecas = 0;
             for (ItemPeca item : pecasAdicionadas) {
-                String totalStr = item.getTotal().replace("R$", "").replace(".", "").replace(",", ".").trim();
-                totalPecas += Double.parseDouble(totalStr);
+                totalPecas += parseValor(item.getTotal());
             }
             lblPecas.setText(df.format(totalPecas));
             lblTotal.setText(df.format(maoObra + totalPecas));
@@ -190,7 +215,7 @@ public class CriarOrdemServicoController implements Initializable {
         }
 
         try {
-            double maoObra = txtMaoObra.getText().isEmpty() ? 0 : Double.parseDouble(txtMaoObra.getText().replace(",", "."));
+            double maoObra = parseValor(txtMaoObra.getText());
 
             int idOrdem = OrdemServicoDAO.criarOrdem(
                     comboVeiculo.getValue().getId(),
@@ -201,7 +226,7 @@ public class CriarOrdemServicoController implements Initializable {
 
             if (idOrdem > 0) {
                 for (ItemPeca item : pecasAdicionadas) {
-                    double precoUnit = Double.parseDouble(item.getPrecoUnitario().replace("R$", "").replace(".", "").replace(",", ".").trim());
+                    double precoUnit = parseValor(item.getPrecoUnitario());
                     OrdemServicoDAO.adicionarPecaNaOrdem(
                             idOrdem,
                             item.getIdPeca(),

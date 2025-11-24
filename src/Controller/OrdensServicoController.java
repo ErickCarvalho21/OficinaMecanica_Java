@@ -54,6 +54,7 @@ public class OrdensServicoController implements Initializable {
     @FXML
     private TableView<OrdemDeServico> tabelaOrdens;
 
+
     Alertas alertas = new Alertas();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -119,7 +120,7 @@ public class OrdensServicoController implements Initializable {
         Parent root = loader.load();
 
         DetalhesOrdemServicoController controller = loader.getController();
-        controller.carregarDadosOrdem(ordemSelecionada);
+        controller.carregarDadosOrdem(ordemSelecionada, "/View/PainelOrdensServico.fxml");
 
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -42,7 +42,7 @@ public class PagamentoController {
         double valor = Double.parseDouble(valorStr);
 
         boolean sucesso = PagamentoDAO.registrarPagamento(
-                Integer.parseInt(ordemAtual.getIdOrdem()),
+                String.valueOf(Integer.parseInt(ordemAtual.getIdOrdem())),
                 valor,
                 comboFormaPagamento.getValue()
         );
