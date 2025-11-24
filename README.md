@@ -188,5 +188,7 @@ Oficina_POO/
 │   ├── Templates/        # Classes utilitárias (ex: Alertas)
 
 │   └── App.java          # Classe principal que inicia a aplicação
+
 ├── .env                  # Arquivo de configuração (não versionado)
+
 └── README.md             # Documentação do projeto
