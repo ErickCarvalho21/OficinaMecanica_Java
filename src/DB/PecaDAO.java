@@ -174,4 +174,27 @@ public class PecaDAO {
 
         return listaPecas;
     }
+
+    public static boolean ajustarEstoque(String idPeca, int quantidade) {
+        Connection conexao = ConexaoComBanco.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conexao.prepareStatement(
+                    "UPDATE peca SET quantidade_estoque = quantidade_estoque + ? WHERE id_peca = ?"
+            );
+            stmt.setInt(1, quantidade); // Pode ser positivo (entrada) ou negativo (saída)
+            stmt.setInt(2, Integer.parseInt(idPeca));
+
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao ajustar estoque: " + e.getMessage());
+            return false;
+        } finally {
+            ConexaoComBanco.fechaConexao(conexao, stmt);
+        }
+    }
+
 }
