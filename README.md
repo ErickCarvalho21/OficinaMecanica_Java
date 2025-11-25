@@ -544,6 +544,6 @@ Encontrou um bug? Tem uma sugestão?
 
 **⭐ Se este projeto te ajudou, deixe uma estrela! ⭐**
 
-Made with ❤️ and ☕
+Feito com ❤️ e JAVA
 
 </div>
