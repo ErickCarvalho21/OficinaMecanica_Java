@@ -4,24 +4,6 @@ Sistema desktop completo desenvolvido em **Java** com **JavaFX** e **MySQL** par
 
 ---
 
-## 📋 Índice
-
-- [Sobre o Projeto](#Sobre-o-projeto)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Requisitos do Sistema](#requisitos-do-sistema)
-- [Instalação](#instalação)
-- [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
-- [Como Usar](#como-usar)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Capturas de Tela](#capturas-de-tela)
-- [Requisitos Atendidos](#requisitos-atendidos)
-- [Melhorias Futuras](#melhorias-futuras)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
-
----
-
 ## 🎯 Sobre o Projeto
 
 Sistema desenvolvido para automatizar e facilitar a gestão completa de oficinas mecânicas, incluindo:
